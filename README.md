@@ -9,7 +9,7 @@ These instructions will get you a copy of the project up and running on your loc
 ### Prerequisites
 
 - Java OpenJDK 17
-- Gradle 7.0 or higher
+- Gradle 8.7 or higher
 - Docker
 
 ### Installing
@@ -17,7 +17,7 @@ These instructions will get you a copy of the project up and running on your loc
 1. Clone the repository to your local machine:
 
 ```sh
-git clone https://yourrepositoryurl.com/BackFixedAssets.git
+git clone https://github.com/MayaCris/BackFixedAssets.git
 ```
 
 2. Navigate to the project directory:
