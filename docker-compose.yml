@@ -1,0 +1,27 @@
+version: '3.9'
+
+services:
+  db-docker:
+    image: gvenzl/oracle-xe
+    ports:
+      - "1522:1521"
+    environment:
+      ORACLE_PASSWORD: admin
+    volumes:
+      - oracle-data:/opt/oracle/oradata
+
+
+  spring-boot-app:
+    image: fixed-asset:latest
+    depends_on:
+      - db-docker
+    ports:
+      - "8070:8070"
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:oracle:thin:@db-docker:1521/xe  # URL de conexión a la base de datos
+      - SPRING_DATASOURCE_USERNAME=SYSTEM  # Usuario de la base de datos
+      - SPRING_DATASOURCE_PASSWORD=admin  # Contraseña de la base de datos
+
+
+volumes:
+  oracle-data:
