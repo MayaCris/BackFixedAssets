@@ -1,5 +1,6 @@
 package com.fixedAssets.web.controller;
 
+import com.fixedAssets.domain.FixedAssetDo;
 import com.fixedAssets.domain.ResponsiblePersonDo;
 import com.fixedAssets.domain.service.ResponsiblePersonService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -87,6 +88,25 @@ public class ResponsiblePersonController {
     @PostMapping("/save")
     public ResponseEntity<ResponsiblePersonDo> save(@RequestBody ResponsiblePersonDo responsiblePersonDo){
         return new ResponseEntity<>(responsiblePersonService.savePerson(responsiblePersonDo), HttpStatus.CREATED);
+    }
+
+    @CrossOrigin(origins = "http://localhost:4200")
+    @Operation(summary = "Actualizar persona responsable por ID", description = "Actualiza una persona responsable de la base de datos por su ID")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Persona responsable actualizada exitosamente",
+                    content = @Content(mediaType = "application/json",
+                            schema = @Schema(implementation = ResponsiblePersonDo.class))),
+            @ApiResponse(responseCode = "404", description = "Persona responsable no encontrada",
+                    content = @Content),
+            @ApiResponse(responseCode = "500", description = "Error interno del servidor",
+                    content = @Content)
+    })
+    @PutMapping("/update/{personIdD}")
+    public ResponseEntity<ResponsiblePersonDo> update(
+            @Parameter(description = "ID del activo fijo", required = true)
+            @PathVariable("personIdD") String personIdD,
+            @RequestBody ResponsiblePersonDo responsiblePersonDo){
+        return new ResponseEntity<>(responsiblePersonService.updatePerson(personIdD, responsiblePersonDo), HttpStatus.OK);
     }
 
 }

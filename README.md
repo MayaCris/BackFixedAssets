@@ -38,6 +38,7 @@ cd BackFixedAssets
 docker build -t fixed-asset:latest .
 docker-compose -p assetapp up -d --build
 ```
+If the spring-boot-app container is not running, please rerun the container manually.
 
 ## Usage
 
